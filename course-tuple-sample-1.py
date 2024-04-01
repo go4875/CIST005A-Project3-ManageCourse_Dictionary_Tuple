@@ -50,16 +50,9 @@ def show_options():
 def list_all(c_dict):
     """
     Function to list all courses
-    :course_list: passed as course list across different functions. Updated with different functions
     """
-    print("Option 1 - List of all courses you are enrolled")
-    #c_dict = {}
-    #print("Your courses list: ", c_dict.items())
-    #if course_list:
-        #print("Your courses list: ", course_list)
-    #else:1
+    print("Option 1 - List of all your courses")
 
-        #print("Your course list is empty")
     #for key in c_dict:
     print("Your courses list: ", '\n', c_dict, '\n')
     return c_dict
@@ -68,8 +61,10 @@ def list_all(c_dict):
 def add_course(c_dict):
     """
     :function to add course to course list
-    :param - course_list - list of courses array. contains list of courses that are added or dropped
-    :param - course - course that is added or dropped to course_list array
+    :param - c_dict - list of courses dictionary. contains list of courses that are added or dropped
+    :param - c_name - course that is added or dropped to course_list array - key for dictionary in key:value pair
+    :param - c_units - part of value pair in tuple datatype 
+    :param - c_term - 
     """
     print("Option 2 - Add course selected")
 
@@ -104,46 +99,29 @@ def add_course(c_dict):
 #returning c_dict inside the loop, which means it will exit after adding just one course. 
 #If you want to keep adding courses, you should move the return statement outside the loop
     return c_dict 
-#print("Your course list: ", list(c_dict.keys()), list(c_dict.values()))
-    #if course_list is list:
-        #course_list.append(course)
-    #else:
-        #print("Unable to validate input")
-    #course_list.append(course)
-    #return course_list
+
 
 def drop_course(c_dict):
     """
     :function to drop course from course list
-    :param - course_list - list of courses array. contains list of courses that are added or dropped
-    :param - course - course that is added or dropped to course_list array
+    :param - c_dict - list of courses dictionary. contains list of courses that are added or dropped
+    :param - r_course - course that is added or dropped to course_list array
     """
     print("Option 3 - Drop course selected")
     if not c_dict:
         print("There are no courses to delete.")
         return c_dict
-    print("Your course list: ", '\n', list(c_dict.keys()))
+    print("Your course list: ", '\n', (c_dict.keys()))
     r_course = input("Please enter course to drop: ")
     if r_course in c_dict:
         del c_dict[r_course]
     else:
-        print(f"Course '{r_course}' not found")
-
 #f at the beginning of the string indicates that it is a formatted string literal, 
 #which allows you to include expressions inside curly braces {} within the string.
 #Inside the string, {course_name} is an expression that will be replaced by the value of the variable course_name.
 #if course_name is 'Math', for example, the resulting string would be "Course 'Math' not found.".
 
         print(f"Course '{r_course}' not found.")
-    return c_dict
-    
-    print("Your course", r_course, " has been dropped")
-    #if course in course_list: #passing value of input to check if exist in course_list
-        #course_list.remove(course)
-    #else:
-        #print("Course is not in your list")
-    #return course_list
-    print("Your current course list: ", c_dict.items())
     return c_dict
 
 def sort_course(c_dict):
@@ -152,12 +130,17 @@ def sort_course(c_dict):
     :param - course_list - list of courses array. contains list of courses that are added or dropped
     :param - course - course that is added or dropped to course_list array
     """
-    if course_list:
-        course_list.sort() #calling sort method to sort course list in ascending order
-        print("Option 4 selected - Sort courses in ascending order: ", course_list)
-    else:
-        print("No courses on list. Please add a course")
-    return course_list
+    #if course_list:
+        #course_list.sort() #calling sort method to sort course list in ascending order
+        #print("Option 4 selected - Sort courses in ascending order: ", course_list)
+    #else:
+        #print("No courses on list. Please add a course")
+    #return course_list
+    #s_dict = c_dict.items()
+    c_dict = sorted(c_dict.items())
+    for k, v in c_dict:
+        print("Your course list: ", k, v)
+    return c_dict
 
 def sort_course_reverse(c_dict):
     """
@@ -175,15 +158,11 @@ def sort_course_reverse(c_dict):
 
 def main():
 # --------------------Main Program--------------------------------
-    #course_list = list()
-    #course_list = []
+
     c_dict = {}
     while True:
         choice = show_options()
         if choice == 1:
-            #course_list = []
-            #course_list = list_all(course_list)
-            #course_list = c_dict.keys, c_dict.values
             c_dict = list_all(c_dict)
         elif choice == 2:
             c_dict =  add_course(c_dict)
