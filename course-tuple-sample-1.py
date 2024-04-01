@@ -148,13 +148,15 @@ def sort_course_reverse(c_dict):
     :param - course_list - list of courses array. contains list of courses that are added or dropped
     :param - course - course that is added or dropped to course_list array
     """
-    if course_list:
-        course_list.sort(reverse=True) #calling sort method with keyword argement,  to sort course list in descending order
-        print("Option 5 selected - Sort courses in descending order: ", course_list)
-    else:
-        print("No courses on list. Please add a course")
-    return course_list
-
+    #if course_list:
+        #course_list.sort(reverse=True) #calling sort method with keyword argement,  to sort course list in descending order
+    print("Option 5 selected - Sort courses in descending order: ", course_list)
+    #else:
+        #print("No courses on list. Please add a course")
+    c_dict = sorted(c_dict.items(), reverse=True)
+    for k, v in c_dict:
+        print("Your course list: ", k, v)
+    return c_dict
 
 def main():
 # --------------------Main Program--------------------------------
