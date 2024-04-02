@@ -54,7 +54,8 @@ def list_all(c_dict):
     print("Option 1 - List of all your courses")
 
     #for key in c_dict:
-    print("Your courses list: ", '\n', c_dict, '\n')
+    #print("Your courses list: ", '\n', c_dict, '\n')
+    print("Your course list: ", '\n',  print_course_list(c_dict))
     return c_dict
 
 
@@ -97,7 +98,8 @@ def add_course(c_dict):
             c_info = tuple([c_unit, c_term])
             c_dict[c_name] = c_info # 
           
-    print("Your course list: ", c_dict.items())
+    #print("Your course list: ", print_course_list(c_dict.items()))
+    print("Your course list: ", '\n',  print_course_list(c_dict))
 #returning c_dict inside the loop, which means it will exit after adding just one course. 
 #If you want to keep adding courses, you should move the return statement outside the loop
     return c_dict 
@@ -132,19 +134,15 @@ def sort_course(c_dict):
     :param - course_list - list of courses array. contains list of courses that are added or dropped
     :param - course - course that is added or dropped to course_list array
     """
-    #if course_list:
-        #course_list.sort() #calling sort method to sort course list in ascending order
-        #print("Option 4 selected - Sort courses in ascending order: ", course_list)
-    #else:
-        #print("No courses on list. Please add a course")
-    #return course_list
-    s_dict = c_dict.keys()
-    #s_dict = sorted(c_dict.keys())
-    s_dict = sorted(s_dict)
+    #c_dict = sorted(c_dict) #overwriting the c_dict variable with the sorted list of keys (sorted(c_dict)). This will discard the original dictionary structure. 
+    #Instead, you should sort the dictionary keys while retaining the associated values. See below
+    s_dict = dict(sorted(c_dict.items())) # use sorted() to sort the dictionary keys (c_dict.items()) and then 
+    # convert it back to a dictionary using dict().
     #for k, v in c_dict:
         #print("Your course list: ", k, v)
-    print("Option 4 selected - Sort courses in ascending order: ", '\n', s_dict)
-    return c_dict
+    #print("Option 4 selected - Sort courses in ascending order: ", '\n', c_dict)
+    print("Your course list in asc order: ", '\n', print_course_list(s_dict))
+    return s_dict
 
 def sort_course_reverse(c_dict):
     """
@@ -152,16 +150,26 @@ def sort_course_reverse(c_dict):
     :param - course_list - list of courses array. contains list of courses that are added or dropped
     :param - course - course that is added or dropped to course_list array
     """
-    #if course_list:
-        #course_list.sort(reverse=True) #calling sort method with keyword argement,  to sort course list in descending order
-    
-    #else:
-        #print("No courses on list. Please add a course")
-    c_dict = sorted(c_dict.items(), reverse=True)
+
+    s_dict = dict(sorted(c_dict.items(), reverse=True))
     #for k, v in c_dict:
         #print("Your course list: ", k, v)
-    print("Option 5 selected - Sort courses in descending order: ", '\n', c_dict)
-    return c_dict
+    print("Option 5 selected - Sort courses in descending order: ", '\n', print_course_list(s_dict))
+    return s_dict
+
+# Function to print course list with headers
+def print_course_list(c_dict):
+    if not c_dict:
+        print("No courses found.")
+        return
+    print("-" * 40)
+    print("{:<20} {:<20}".format("Course", "Units and Term"))
+    print("-" * 40)
+# AttributeError: 'list' object has no attribute 'items' error occurs when attempting to use or call the items() method on a list data type. 
+# This issue can be easily resolved by converting the list object into a dictionary.
+    for course, (units, term) in c_dict.items():
+        print("{:<20} {:<20}".format(course, f"{units} ({term})"))
+
 
 def main():
 # --------------------Main Program--------------------------------
