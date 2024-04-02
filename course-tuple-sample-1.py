@@ -69,7 +69,9 @@ def add_course(c_dict):
     print("Option 2 - Add course selected")
 
     #course = input(str("Please enter course to add: "))
-    c_dict = {}
+    # initializes a new empty dictionary. Otherwise, it uses the existing c_dict provided.
+    if c_dict is None:
+        c_dict = {}
     """
     better to use a while loop with conditions for termination rather 
     than catching exceptions for normal control flow.
@@ -136,10 +138,12 @@ def sort_course(c_dict):
     #else:
         #print("No courses on list. Please add a course")
     #return course_list
-    #s_dict = c_dict.items()
-    c_dict = sorted(c_dict.items())
-    for k, v in c_dict:
-        print("Your course list: ", k, v)
+    s_dict = c_dict.keys()
+    #s_dict = sorted(c_dict.keys())
+    s_dict = sorted(s_dict)
+    #for k, v in c_dict:
+        #print("Your course list: ", k, v)
+    print("Option 4 selected - Sort courses in ascending order: ", '\n', s_dict)
     return c_dict
 
 def sort_course_reverse(c_dict):
@@ -150,12 +154,13 @@ def sort_course_reverse(c_dict):
     """
     #if course_list:
         #course_list.sort(reverse=True) #calling sort method with keyword argement,  to sort course list in descending order
-    print("Option 5 selected - Sort courses in descending order: ", course_list)
+    
     #else:
         #print("No courses on list. Please add a course")
     c_dict = sorted(c_dict.items(), reverse=True)
-    for k, v in c_dict:
-        print("Your course list: ", k, v)
+    #for k, v in c_dict:
+        #print("Your course list: ", k, v)
+    print("Option 5 selected - Sort courses in descending order: ", '\n', c_dict)
     return c_dict
 
 def main():
